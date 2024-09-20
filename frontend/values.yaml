@@ -1,8 +1,11 @@
+# values.yaml
+
 image:
-  repository: public.ecr.aws/v6h3a7p0/guardian-test
+  repository: 544167776152.dkr.ecr.eu-north-1.amazonaws.com/frontend-dev-ecr
+  tag: "1.0"
   pullPolicy: IfNotPresent
-  tag: "1.0" # Update this to match the tag you pushed, e.g., "1.0"
-  
+
+replicaCount: 2
 service:
   type: LoadBalancer
   port: 80

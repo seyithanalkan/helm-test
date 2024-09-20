@@ -1,3 +1,5 @@
+# deployment.yaml
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -12,20 +14,10 @@ spec:
       labels:
         app: {{ include "frontend-guardian.name" . }}
     spec:
+      imagePullSecrets:
+        - name: regcred   # Reference to the ECR secret created by Terraform
       containers:
         - name: frontend
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
             - containerPort: 80
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 80
-            initialDelaySeconds: 5
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 80
-            initialDelaySeconds: 5
-            periodSeconds: 10
