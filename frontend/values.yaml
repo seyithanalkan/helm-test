@@ -34,9 +34,9 @@ hpa:
   minReplicas: 2
   maxReplicas: 5
   cpu:
-    targetUtilization: 70
+    targetUtilization: 10
   memory:
-    targetUtilization: 80
+    targetUtilization: 10
 
 ingress:
   enabled: false
