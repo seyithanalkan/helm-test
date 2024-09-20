@@ -1,0 +1,10 @@
+image:
+  repository: public.ecr.aws/v6h3a7p0/guardian-test
+  pullPolicy: IfNotPresent
+  tag: "1.0" # Update this to match the tag you pushed, e.g., "1.0"
+  
+service:
+  type: LoadBalancer
+  port: 80
+ingress:
+  enabled: false # Change to true if you want to configure an Ingress later
