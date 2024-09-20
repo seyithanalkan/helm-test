@@ -3,11 +3,40 @@
 image:
   repository: 544167776152.dkr.ecr.eu-north-1.amazonaws.com/frontend-dev-ecr
   tag: "1.0"
-  pullPolicy: Always
+  pullPolicy: Always   # Ensures Kubernetes always pulls the latest image
 
 replicaCount: 2
+
 service:
   type: LoadBalancer
   port: 80
+  targetPort: 80
+
+resources:
+  requests:
+    memory: "256Mi"
+    cpu: "250m"
+  limits:
+    memory: "512Mi"
+    cpu: "500m"
+
+probes:
+  liveness:
+    path: "/healthz"
+    initialDelaySeconds: 10
+    periodSeconds: 5
+  readiness:
+    path: "/readyz"
+    initialDelaySeconds: 5
+    periodSeconds: 5
+
+hpa:
+  minReplicas: 2
+  maxReplicas: 5
+  cpu:
+    targetUtilization: 70
+  memory:
+    targetUtilization: 80
+
 ingress:
-  enabled: false # Change to true if you want to configure an Ingress later
+  enabled: false
