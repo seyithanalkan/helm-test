@@ -1,5 +1,6 @@
 replicaCount: 3
-
+serviceAccount:
+  name: backend-sa
 image:
   repository: 544167776152.dkr.ecr.eu-north-1.amazonaws.com/backend-dev-ecr
   tag: "1.0"
