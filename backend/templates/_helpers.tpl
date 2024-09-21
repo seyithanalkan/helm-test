@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "frontend-guardian.name" -}}
+{{- define "backend-guardian.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "frontend-guardian.fullname" -}}
+{{- define "backend-guardian.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "frontend-guardian.chart" -}}
+{{- define "backend-guardian.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "frontend-guardian.labels" -}}
-helm.sh/chart: {{ include "frontend-guardian.chart" . }}
-{{ include "frontend-guardian.selectorLabels" . }}
+{{- define "backend-guardian.labels" -}}
+helm.sh/chart: {{ include "backend-guardian.chart" . }}
+{{ include "backend-guardian.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "frontend-guardian.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "frontend-guardian.name" . }}
+{{- define "backend-guardian.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "backend-guardian.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "frontend-guardian.serviceAccountName" -}}
+{{- define "backend-guardian.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "frontend-guardian.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "backend-guardian.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
